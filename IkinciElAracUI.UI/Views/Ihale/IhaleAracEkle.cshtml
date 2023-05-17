@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IhaleAracVM
+
+
+<h2>İhaleye Araç Ekle</h2>
+
+
+@using (Html.BeginForm("IhaleAracEkle", "Ihale", FormMethod.Post))
+{
+
+    <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4">
+
+
+
+            @*@for (int i = 0; i < Model.IhaleAracVMs.Count; i++)*@
+            @*{*@
+                
+                @*@Html.DropDownListFor(model => model.IhaleAracVMs[i].AracID, new SelectList(ViewBag.AracIDlist, "AracID", "AracID"), "Seçiniz");*@
+
+
+           @* }*@
+           @* @Html.DropDownListFor(model => model.AracID, new SelectList(ViewBag.AracIDlist, "AracID", "AracID"), "Seçiniz")*@
+            <label>AracID:</label>
+            @Html.TextBoxFor(a=>a.AracID)
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-4">
+            <label>Ihale Başlangıç Fiyatı:</label>
+            @Html.TextBoxFor(a=>a.IhaleBaslangicFiyati)
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-4">
+            <label>Max Alım Fiyatı:</label>
+            @Html.TextBoxFor(a=>a.MaxAlimFiyati)
+
+        </div>
+
+            
+    </div>
+    <div class="col-md-4 d-flex justify-content-start">
+        <input type="submit" name="name" value="Kaydet" class="btn btn-primary" />
+    </div>
+
+}

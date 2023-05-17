@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model FiyatDTO
+
+@using (Html.BeginForm("IndexTeklif", "Ihale", FormMethod.Post))
+{
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6">
+            @Html.TextBoxFor(a=>a.Fiyat)
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-3">
+            <input type="submit" name="name" value="Teklif Kaydet" class="btn btn-primary btn-lg btn-block" />
+        </div>
+    </div>
+
+
+                            
+}

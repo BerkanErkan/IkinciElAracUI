@@ -1,0 +1,168 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IhaleDTO
+<h2>İhale Ekle</h2>
+
+
+    @using (Html.BeginForm("IhaleEkle", "Ihale", FormMethod.Post))
+    {
+        <div class="row" style="margin-top: 20px;">
+            @Html.HiddenFor(a => a.IhaleID)
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4">
+                İhale Adı:
+                @Html.TextBoxFor(a => a.IhaleAdi, new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                BireyselMi/KurumsalMı:
+                @Html.DropDownListFor(model => model.KurumsalMi, new List<SelectListItem>()
+                {
+                    new SelectListItem() { Text = "Bireysel", Value = "False" },
+                    new SelectListItem() { Text = "Kurumsal", Value = "True" }
+                }, "Seçiniz", new { @class = "form-control" })
+
+            </div>
+            @*<div class="col-md-4">
+                Sirket:
+                @Html.DropDownListFor(model => model.SirketID, new SelectList(ViewBag.Sirketlist, "SirketID", "SirketAdi"), "Seçiniz", new { @class = "form-control" })
+
+            </div>*@
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4">
+                Statu:
+                @Html.DropDownListFor(model => model.IhaleStatuID, new List<SelectListItem>()
+                {
+                    new SelectListItem() { Text = "Başlamadı", Value = "1" },
+                    new SelectListItem() { Text = "Başladı", Value = "2" },
+                    new SelectListItem() { Text = "Bittti", Value = "3" },
+                    new SelectListItem() { Text = "İptal", Value = "4" }
+                }, "Seçiniz", new { @class = "form-control" })
+
+            </div>
+
+        @*<div class="col-md-4">
+            <label class="form-label">İhale Başlangıç tarihi</label>
+            <input type="date" class="form-control" value="@Model.IhaleBaslangicTarihi">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">İhale Başlangıç Saati</label>
+            <input type="time" class="form-control" value="@Model.IhaleBaşlangıçSaati">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">İhale Bitiş tarihi</label>
+            <input type="date" class="form-control" value="@Model.IhaleBitistarihi">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">İhale Bitiş Saati</label>
+            <input type="time" class="form-control" value="@Model.IhaleBitisSaati">
+        </div>*@
+            @*<div class="col-md-4">
+                Statu:
+            @Html.DropDownListFor(model => model.IhaleStatuID, new SelectList(ViewBag.SatatuList, "IhaleStatuID", "IhaleStatuAdi"), "Seçiniz", new { @class = "form-control" })
+
+            </div>*@
+            @*<div class="col-md-4"> başlangıç ve bitişi datatime tipinde al
+                Model:
+                @Html.DropDownListFor(model => model.AracModelID, new SelectList(ViewBag.ModelList, "AracModelID", "AracModelAdi"), "Seçiniz", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                GovdeTipi:
+                @Html.DropDownListFor(model => model.GovdeTipiID, new SelectList(ViewBag.GovdeTipilist, "GovdeTipiID", "GovdeTipiAdi"), "Seçiniz", new { @class = "form-control" })
+            </div>*@
+        </div>
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Ihale Arac Listesi
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>AracID</th>
+                        <th>Arac Marka</th>
+                        <th>Arac Model</th>
+                        <th>Kurumsal mı</th>
+                        <th>Kaydeden Kullanıcı</th>
+                        <th>Kaydedilme Zamanı</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+
+
+                    @for (int i = 0; i < Model.IhaleAracDTOs.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].AracID, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].AracMarkaAdi, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].AracModelAdi, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].KurumsalMi, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].KaydedenKullanici, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(a => a.IhaleAracDTOs[i].KaydedilmeZamanı, new { @readonly = "readonly" })
+                            </td>
+                            <td>
+                            @*<td>
+                    <form method="post" action="@Url.Action("AracCikar", "Home")">
+                    <input type="hidden" name="AracID" value="@item.AracID" />
+                    <button type="submit" class="btn btn-danger">Arac çıkar</button>
+                    </form>
+                    </td>*@
+                            <td>@Html.HiddenFor(a=>a.IhaleAracDTOs[i].IhaleAracID)</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4">
+                <input type="submit" name="name" value="Ihaleye Arac Ekle" class="btn btn-primary" />
+            </div>
+
+
+            @if (ViewBag.Kaydet == 1)
+            {
+                <div class="col-md-4 d-flex justify-content-end">
+                    <input type="submit" name="name" value="Kaydet" class="btn btn-primary" />
+                </div>
+            }
+            else
+            {
+
+                <div class="col-md-4 d-flex justify-content-end">
+                    <input type="submit" name="name" value="Guncelle" class="btn btn-primary" />
+                </div>
+            }
+
+
+        </div>
+
+
+
+
+
+    }

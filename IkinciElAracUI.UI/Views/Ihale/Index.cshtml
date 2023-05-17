@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="row" style="margin-top: 20px;">
+    @*<div class="col-md-6">
+        @using (Html.BeginForm("IndexKullaniciOnay", "Home", FormMethod.Post))
+        {
+            @Html.DropDownList("Onay", new List<SelectListItem>()
+        {
+        new SelectListItem() { Text = "Onaylı", Value = "true" },
+        new SelectListItem() { Text = "Onaysız", Value = "false" }
+        }, "Onay Durumu..", new { @class = "form-control" })
+            <input type="submit" name="name" value="Seçimi bitir" class="btn btn-primary" />
+        }
+    </div>*@
+    <div class="col-md-6">
+        @using (Html.BeginForm("IndexIhaleRol", "Ihale", FormMethod.Post))
+        {
+            @Html.DropDownList("Rol", new List<SelectListItem>()
+        {
+        new SelectListItem() { Text = "Kurumsal", Value = "2" },
+        new SelectListItem() { Text = "Bireysel", Value = "1" }
+        }, "Rol Bilgisi..", new { @class = "form-control" })
+            <input type="submit" name="name" value="Seçimi bitir" class="btn btn-primary" />
+        }
+    </div>
+</div>
+
+
+@using (Html.BeginForm("IndexIhaleEkle", "Ihale", FormMethod.Post))
+{
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-6">
+            <input type="submit" name="name" value="İhale Ekle" class="btn btn-primary btn-lg btn-block" />
+        </div>
+
+    </div>
+
+
+
+}
+<h1 class="mt-4">Ihaleler</h1>
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Ihaleler
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>İhale ID</th>
+                    <th>İhale Adı</th>
+                    <th>Kurumsalmı</th>
+                    <th>İhale Başlangıç</th>
+                    <th>İhale Bitiş</th>
+                    <th>statü</th>
+                    <th>Kaydeden Kullanıcı</th>
+                    <th>Kaydedme Zamanı</th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+
+                @foreach (IhaleDTO item in ViewBag.BenimIhalelerim)
+                {
+                    <tr>
+                        <td>@item.IhaleID</td>
+                        <td>@item.IhaleAdi</td>
+                        <td>@item.KurumsalMi</td>
+                        <td>@item.IhaleBaslangicTarihi</td>
+                        <td>@item.IhaleBitisTarihi</td>
+                        <td>@item.IhaleStatuAdi</td>
+                        <td>@item.KaydedenKullanici</td>
+                        <td>@item.KaydetmeZamani</td>
+
+                        <td>
+                            <form method="post" action="@Url.Action("IndexIhaleDetay", "Ihale")">
+                                <input type="hidden" name="IhaleID" value="@item.IhaleID" />
+                                <button type="submit" class="btn btn-primary">Düzenle</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="@Url.Action("KullaniciSil", "Home")">
+                                <input type="hidden" name="kullaniciID" value="@item.IhaleID" />
+                                <button type="submit" class="btn btn-danger">İhaleyi Sil</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

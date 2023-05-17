@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IhaleFiyatDTO
+<h2>İhale Arac Teklif</h2>
+
+
+
+<div class="row" style="margin-top: 20px;">
+    @Html.HiddenFor(a => a.IhaleFiyatID)
+    @Html.HiddenFor(a => a.IhaleID)
+</div>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-4">
+        İhale Adı:
+        @Html.TextBoxFor(a => a.Plaka, new { @readonly = "readonly" })
+    </div>
+    <div class="col-md-4">
+        İhale Adı:
+        @Html.TextBoxFor(a => a.AracMarkaAdi, new { @readonly = "readonly" })
+    </div>
+    <div class="col-md-4">
+        İhale Adı:
+        @Html.TextBoxFor(a => a.AracModelAdi, new { @readonly = "readonly" })
+    </div>
+</div>
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Teklif Listesi
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    <th>Fiyat</th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+
+
+                @for (int i = 0; i < Model.FiyatList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(a => a.FiyatList[i].KullaniciAdi, new { @readonly = "readonly" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(a => a.FiyatList[i].Fiyat, new { @readonly = "readonly" })
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        
+
+
+    </div>
+</div>
+<div class="row" style="margin-top: 20px;">
+
+
+
+    <div class="col-md-4">
+        <form method="get" action="@Url.Action("IndexTeklif", "Ihale")">
+            <button type="submit" class="btn btn-primary">Araca Teklif Ver</button>
+        </form>
+       
+    </div>
+    <div class="col-md-4">
+        
+        <form method="post" action="@Url.Action("IndexIhaleIcerik", "Ihale")">
+            <input type="hidden" name="IhaleAracID" value="@Model.IhaleID" />
+            <button type="submit" class="btn btn-primary">İhale Sayfasın Dön</button>
+        </form>
+
+    </div>
+
+</div>
